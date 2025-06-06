@@ -10,10 +10,12 @@ final readonly class {{ class }}
 {
     /**
      * Execute the action.
+     *
+     * @throws Throwable
      */
-    public function handle(): void
+    public function handle(array $data): void
     {
-        DB::transaction(function (): void {
+        DB::transaction(function () use($data): void {
             //
         });
     }
