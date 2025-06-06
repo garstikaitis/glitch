@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 
 final class Widget extends Model
 {
-    protected  $guarded = [];
+    protected $guarded = [];
 }
