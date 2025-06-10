@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use App\DTOs\UpsertOrganizationDTO;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -29,5 +30,16 @@ final class UpsertOrganizationRequest extends FormRequest
             'slug' => 'required|string|max:255|unique:organizations,slug',
             'subscription_type' => 'required|string|in:FREE,PRO',
         ];
+    }
+
+    public function toDTO(): UpsertOrganizationDTO
+    {
+        $data = $this->validated();
+
+        return new UpsertOrganizationDTO(
+            $data['name'],
+            $data['slug'],
+            $data['subscription_type'],
+        );
     }
 }

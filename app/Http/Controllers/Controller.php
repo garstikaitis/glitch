@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
+
 abstract class Controller
 {
-    protected function ok(mixed $data, ?string $message = null)
+    protected function ok(mixed $data, ?string $message = null): JsonResponse
     {
         return response()->json([
             ...$data,
@@ -15,7 +17,7 @@ abstract class Controller
         ]);
     }
 
-    protected function oops(string $message)
+    protected function oops(string $message): JsonResponse
     {
         return response()->json([
             'success' => false,

@@ -14,11 +14,13 @@ final class Organization extends Model
 
     protected $guarded = [];
 
+    /** @return HasMany<User, $this> */
     public function users(): HasMany
     {
         return $this->hasMany(User::class);
     }
 
+    /** @return HasMany<Widget, $this> */
     public function widgets(): HasMany
     {
         return $this->hasMany(Widget::class);

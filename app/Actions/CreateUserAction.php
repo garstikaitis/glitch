@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions;
 
+use App\DTOs\UpsertUserDTO;
 use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -11,18 +12,16 @@ use Throwable;
 
 final readonly class CreateUserAction
 {
-    public function __construct(private array $data) {}
-
     /**
      * Execute the action.
      *
      * @throws Throwable
      */
-    public function handle(): User
+    public function handle(UpsertUserDTO $data): User
     {
-        return DB::transaction(function (): User {
-            $user = User::create($this->data);
-            Organization::find($this->data['organization_id'])
+        return DB::transaction(function () use ($data): User {
+            $user = User::create($data->toArray());
+            Organization::find($data->organizationId)
                 ->users()
                 ->save($user);
 

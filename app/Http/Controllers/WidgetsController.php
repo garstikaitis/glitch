@@ -8,11 +8,12 @@ use App\Actions\CreateWidgetAction;
 use App\Http\Requests\UpsertWidgetRequest;
 use App\Models\Organization;
 use App\Models\Widget;
+use Illuminate\Http\JsonResponse;
 use Throwable;
 
 final class WidgetsController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
         return $this->ok(Widget::all());
     }
@@ -20,10 +21,10 @@ final class WidgetsController extends Controller
     /**
      * @throws Throwable
      */
-    public function store(UpsertWidgetRequest $request, Organization $organization, CreateWidgetAction $action)
+    public function store(UpsertWidgetRequest $request, Organization $organization, CreateWidgetAction $action): JsonResponse
     {
         return $this->ok(
-            $action->handle($request->validated(), $organization)
+            $action->handle($request->toDTO(), $organization)
         )->setStatusCode(201);
     }
 }
