@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 
-abstract class Controller
+final abstract class Controller
 {
     protected function ok(mixed $data, ?string $message = null): JsonResponse
     {

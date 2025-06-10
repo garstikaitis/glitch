@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DTOs;
 
-use App\Traits\Arrayable;
+use App\Concerns\Arrayable;
 
 final readonly class UpsertUserDTO
 {
