@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Actions\CreateWidgetAction;
+use App\Concerns\RespondsWithDefaults;
 use App\Http\Requests\UpsertWidgetRequest;
 use App\Models\Organization;
 use App\Models\Widget;
 use Illuminate\Http\JsonResponse;
 use Throwable;
 
-final class WidgetsController extends Controller
+final class WidgetsController
 {
+    use RespondsWithDefaults;
+
     public function index(): JsonResponse
     {
         return $this->ok(Widget::all());

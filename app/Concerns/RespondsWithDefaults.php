@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Concerns;
 
 use Illuminate\Http\JsonResponse;
 
-final abstract class Controller
+trait RespondsWithDefaults
 {
     protected function ok(mixed $data, ?string $message = null): JsonResponse
     {

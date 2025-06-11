@@ -4,42 +4,38 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-use App\DTOs\OrganizationDTO;
+use App\DTOs\UserDTO;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-final class UpsertOrganizationRequest extends FormRequest
+final class UpsertUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return auth()->user()?->isAdmin();
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:organizations,slug',
-            'subscription_type' => 'required|string|in:FREE,PRO',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8',
         ];
     }
 
-    public function toDTO(): OrganizationDTO
+    public function toDTO(): UserDTO
     {
         $data = $this->validated();
 
-        return new OrganizationDTO(
-            $data['name'],
-            $data['slug'],
-            $data['subscription_type'],
-        );
+        return new UserDTO(organizationId: null, name: $data['name'], email: $data['email'], emailVerifiedAt: null, password: $data['password'], rememberToken: null);
     }
 }

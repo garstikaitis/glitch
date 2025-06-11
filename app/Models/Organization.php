@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 final class Organization extends Model
 {
     use SoftDeletes;
-
     protected $guarded = [];
 
     /** @return HasMany<User, $this> */

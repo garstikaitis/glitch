@@ -5,13 +5,16 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Actions\CreateOrganizationAction;
+use App\Concerns\RespondsWithDefaults;
 use App\Http\Requests\UpsertOrganizationRequest;
 use App\Models\Organization;
 use Illuminate\Http\JsonResponse;
 use Throwable;
 
-final class OrganizationsController extends Controller
+final class OrganizationsController
 {
+    use RespondsWithDefaults;
+
     /**
      * @throws Throwable
      */

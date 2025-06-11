@@ -6,7 +6,7 @@ namespace App\DTOs;
 
 use App\Concerns\Arrayable;
 
-final readonly class UpsertOrganizationDTO
+final readonly class OrganizationDTO
 {
     use Arrayable;
 

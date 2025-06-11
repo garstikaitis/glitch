@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-use App\DTOs\UpsertWidgetDTO;
+use App\DTOs\WidgetDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
 final class UpsertWidgetRequest extends FormRequest
@@ -31,10 +31,10 @@ final class UpsertWidgetRequest extends FormRequest
         ];
     }
 
-    public function toDTO(): UpsertWidgetDTO
+    public function toDTO(): WidgetDTO
     {
         $data = $this->validated();
 
-        return new UpsertWidgetDTO($data['name'], $data['domain'], $data['type']);
+        return new WidgetDTO(name: $data['name'], domain: $data['domain'], uuid: null,type: $data['type']);
     }
 }
