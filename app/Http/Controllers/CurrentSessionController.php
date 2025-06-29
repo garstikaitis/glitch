@@ -6,14 +6,22 @@ namespace App\Http\Controllers;
 
 use App\Concerns\RespondsWithDefaults;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Validation\ValidationException;
+use Inertia\Inertia;
 
 final class CurrentSessionController
 {
     use RespondsWithDefaults;
 
-    public function store(Request $request): JsonResponse
+    public function show()
+    {
+        return Inertia::render('Login');
+    }
+
+    public function store(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
             'email' => 'required|email',
@@ -23,17 +31,16 @@ final class CurrentSessionController
 
         if (Auth::attempt($credentials, $credentials['remember'] ?? false)) {
             $request->session()->regenerate();
-
-            return $this->ok(Auth::user());
+            return redirect()->route('dashboard.index');
         }
-
-        return $this->oops('Invalid credentials')->setStatusCode(401);
+        throw ValidationException::withMessages([
+            'email' => 'These credentials do not match our records.',
+        ]);
     }
 
     public function destroy(): JsonResponse
     {
         Auth::logout();
-
         return $this->ok([]);
     }
 }

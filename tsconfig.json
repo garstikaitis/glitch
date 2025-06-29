@@ -1,0 +1,38 @@
+{
+    "compilerOptions": {
+        "target": "es2020",
+        "module": "esNext",
+        "types": ["vite/client"],
+        "useDefineForClassFields": true,
+        "skipLibCheck": true,
+        "importHelpers": true,
+        "moduleResolution": "bundler",
+        "allowJs": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+
+        "forceConsistentCasingInFileNames": false,
+        "sourceMap": true,
+        "baseUrl": "",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "preserve",
+        /* Linting */
+        "strict": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "paths": {
+            "@/*": ["./resources/js/*"],
+            "@components/*": ["./resources/js/components"],
+        },
+    },
+    "include": [
+        "vite.config.ts",
+        "resources/js/**/*.ts",
+        "resources/js/**/*.vue"
+    ],
+    "exclude": ["node_modules"]
+}
