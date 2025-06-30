@@ -32,7 +32,8 @@
     "include": [
         "vite.config.ts",
         "resources/js/**/*.ts",
-        "resources/js/**/*.vue"
+        "resources/js/**/*.vue",
+        "auto-imports.d.ts",
     ],
     "exclude": ["node_modules"]
 }

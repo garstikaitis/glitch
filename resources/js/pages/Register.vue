@@ -13,9 +13,7 @@
                         <label>Password</label>
                         <Message v-if="props.errors.password">{{props.errors.password}}</Message>
                     </FloatLabel>
-                    <div>Don't have an account yet?</div>
-                    <RouterLink href="/register">Go Here</RouterLink>
-                    <Button type="submit" class="w-full">Sign in</Button>
+                    <Button type="submit" class="w-full">Create account</Button>
                 </form>
             </div>
         </div>
@@ -23,18 +21,17 @@
 </template>
 
 <script setup lang="ts">
-import {router} from "@inertiajs/vue3";
+import {router, useForm} from "@inertiajs/vue3";
 import {reactive} from 'vue';
-import Layout from "@/layouts/Layout.vue";
 interface Props {
     errors: Record<string, string>
 }
 const props = defineProps<Props>();
 
-const form = reactive({email: '', password: ''});
+const form = useForm({email: '', password: ''});
 
 function submit() {
-    router.post('/current-session', form)
+    router.post('/users', form)
 }
 </script>
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Concerns\RespondsWithDefaults;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,19 +27,18 @@ final class CurrentSessionController
             'password' => 'required',
             'remember' => 'bool',
         ]);
-
         if (Auth::attempt($credentials, $credentials['remember'] ?? false)) {
             $request->session()->regenerate();
             return redirect()->route('dashboard.index');
         }
         throw ValidationException::withMessages([
             'email' => 'These credentials do not match our records.',
-        ]);
+        ])->errorBag('serverErrors');
     }
 
-    public function destroy(): JsonResponse
+    public function destroy(): RedirectResponse
     {
         Auth::logout();
-        return $this->ok([]);
+        return redirect()->route('currentSession.show');
     }
 }
