@@ -15,7 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->web([HandleInertiaRequests::class]);
+        $middleware->web([HandleInertiaRequests::class])
+            ->redirectUsersTo('/dashboard')
+            ->redirectGuestsTo('/login');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

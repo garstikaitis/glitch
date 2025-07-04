@@ -8,6 +8,7 @@ use App\DTOs\WidgetDTO;
 use App\Models\Organization;
 use App\Models\Widget;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Throwable;
 
 final readonly class CreateWidgetAction
@@ -21,8 +22,10 @@ final readonly class CreateWidgetAction
     public function handle(WidgetDTO $data, Organization $organization): Widget
     {
         return DB::transaction(function () use ($organization, $data): Widget {
+            $data = $data->toArray();
+            $data['uuid'] = Str::uuid()->toString();
             /** @var Widget $widget */
-            $widget = $organization->widgets()->create($data->toArray());
+            $widget = $organization->widgets()->create($data);
 
             return $widget;
         });

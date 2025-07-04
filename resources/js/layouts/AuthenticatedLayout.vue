@@ -4,12 +4,9 @@
             <TheSidebar />
             <TheHeader />
 
-            <div class="ml-64">
-
-                <main class="p-6">
-                    <slot></slot>
-                </main>
-            </div>
+            <main class="ml-64">
+                <slot></slot>
+            </main>
         </div>
     </Layout>
 </template>

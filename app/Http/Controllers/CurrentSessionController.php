@@ -10,12 +10,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
+use Inertia\Response;
 
 final class CurrentSessionController
 {
     use RespondsWithDefaults;
 
-    public function show()
+    public function show(): Response
     {
         return Inertia::render('Login');
     }
@@ -39,6 +40,6 @@ final class CurrentSessionController
     public function destroy(): RedirectResponse
     {
         Auth::logout();
-        return redirect()->route('currentSession.show');
+        return redirect()->route('login');
     }
 }

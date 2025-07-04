@@ -1,8 +1,8 @@
 <template>
-    <header class="bg-surface-0 border-b border-surface-200 px-6 ml-64 h-20 flex items-center">
+    <header class="bg-surface-0 px-6 ml-64 h-20 flex items-center">
         <div class="flex items-center justify-between w-full">
             <div class="flex items-center gap-4 items-center">
-                <h1 class="text-2xl font-semibold text-surface-900 capitalize">Active page</h1>
+                <h1 class="text-2xl font-semibold text-surface-900 capitalize">{{page.component}}</h1>
             </div>
 
             <div class="flex items-center gap-4">
@@ -32,12 +32,17 @@
 
 <script setup lang="ts">
 import {ref} from "vue";
+import {usePage, router} from "@inertiajs/vue3";
 const menu = ref();
+const page = usePage();
 
 const searchQuery = ref('');
-const menuItems = ref([ { id: 'dashboard', label: 'Dashboard', icon: 'pi pi-home' } ]);
+const menuItems = ref([ { id: 'logout', label: 'Logout', icon: 'pi pi-power-off', command: logout } ]);
 function handleMenu(event: Event) {
     menu.value.toggle(event)
+}
+function logout() {
+    router.delete('/current-session');
 }
 </script>
 
