@@ -9,7 +9,9 @@ import { PrimeVueResolver } from "@primevue/auto-import-resolver";
 
 export default defineConfig({
     plugins: [
-        vueDevTools(),
+        vueDevTools({
+            appendTo: /resources\/js\/(app|widget\/widget)\.ts$/
+        }),
         AutoImport({
             imports: ["vue"],
             dts: "./auto-imports.d.ts",

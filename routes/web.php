@@ -11,6 +11,8 @@ use App\Http\Controllers\WidgetsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/widgets/{widget:uuid}/embed', [WidgetsController::class, 'embed'])->name('widgets.embed');
+Route::get('/test-widget', [WidgetsController::class, 'showTestWidget'])->name('widgets.show-test-widget');
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [CurrentSessionController::class, 'show'])->name('login');
     Route::post('/current-session', [CurrentSessionController::class, 'store'])->name('currentSession.store');

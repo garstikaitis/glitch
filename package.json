@@ -14,7 +14,8 @@
         "laravel-vite-plugin": "^1.2.0",
         "tailwindcss": "^4.1.11",
         "unplugin-vue-components": "^28.8.0",
-        "vite": "^6.2.4"
+        "vite": "^6.2.4",
+        "vite-plugin-vue-devtools": "^8.0.3"
     },
     "dependencies": {
         "@inertiajs/vue3": "^2.0.13",
@@ -22,7 +23,6 @@
         "@vitejs/plugin-vue": "^5.2.4",
         "primeicons": "^7.0.0",
         "primevue": "^4.3.5",
-        "unplugin-auto-import": "^19.3.0",
-        "vite-plugin-vue-devtools": "^7.7.7"
+        "unplugin-auto-import": "^19.3.0"
     }
 }

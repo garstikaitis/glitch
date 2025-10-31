@@ -10,5 +10,5 @@ final readonly class UserDTO
 {
     use Arrayable;
 
-    public function __construct(public ?int $organizationId, public string $name, public string $email, public ?string $emailVerifiedAt, public ?string $password, public ?string $rememberToken) {}
+    public function __construct(private ?int $organizationId, private string $name, private string $email, private ?string $emailVerifiedAt, private ?string $password, private ?string $rememberToken) {}
 }

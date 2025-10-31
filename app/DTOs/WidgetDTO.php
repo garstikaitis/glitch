@@ -10,5 +10,5 @@ final readonly class WidgetDTO
 {
     use Arrayable;
 
-    public function __construct(public string $name, public string $domain, public ?string $uuid, public string $type) {}
+    public function __construct(private string $name, private string $domain, private ?string $uuid, private string $type) {}
 }

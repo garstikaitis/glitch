@@ -10,5 +10,5 @@ final readonly class OrganizationDTO
 {
     use Arrayable;
 
-    public function __construct(public string $name, public string $slug, public string $subscriptionType) {}
+    public function __construct(private string $name, private string $slug, private string $subscriptionType) {}
 }
