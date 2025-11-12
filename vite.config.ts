@@ -29,10 +29,21 @@ export default defineConfig({
             resolvers: [PrimeVueResolver()],
         }),
         laravel({
-            input: ["resources/css/app.css", "resources/js/app.ts"],
+            input: ["resources/css/app.css", "resources/js/app.ts", "resources/js/widget/widget.ts"],
             refresh: true,
         }),
         vue(),
         tailwindcss(),
     ],
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks: (id) => {
+                    if (id.includes('widget')) {
+                        return 'widget';
+                    }
+                }
+            }
+        }
+    },
 });

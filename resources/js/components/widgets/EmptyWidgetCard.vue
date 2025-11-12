@@ -1,6 +1,6 @@
 
 <template>
-        <Card class="w-1/2 h-[400px] flex items-center justify-center">
+        <Card class="flex items-center justify-center min-h-[200px]">
             <template #content>
                     <RouterLink href="/widgets/create">
                         <Button @click="goToCreate" size="small" variant="outlined">

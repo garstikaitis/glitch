@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Actions\CreateWidgetAction;
+use App\Actions\EmbedWidget;
 use App\Concerns\RespondsWithDefaults;
 use App\Http\Requests\UpsertWidgetRequest;
 use App\Http\Resources\WidgetResource;
 use App\Models\Organization;
 use App\Models\Widget;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use Throwable;
@@ -40,8 +40,15 @@ final class WidgetsController
         return to_route('widgets.index');
     }
 
+    public function embed(Widget $widget, EmbedWidget $action)
+    {
+        return $action->handle($widget);
+    }
+
     public function showTestWidget()
     {
         return view('test-widget');
     }
+
+
 }

@@ -13,6 +13,24 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/widgets/{widget:uuid}/embed', [WidgetsController::class, 'embed'])->name('widgets.embed');
 Route::get('/test-widget', [WidgetsController::class, 'showTestWidget'])->name('widgets.show-test-widget');
+Route::get('/build/assets/{path}', function ($path) {
+    $file = public_path("build/assets/{$path}");
+
+    if (!file_exists($file)) {
+        abort(404);
+    }
+
+    $mimeType = match(pathinfo($path, PATHINFO_EXTENSION)) {
+        'js' => 'application/javascript',
+        'css' => 'text/css',
+        default => 'application/octet-stream'
+    };
+
+    return response(file_get_contents($file))
+        ->header('Content-Type', $mimeType)
+        ->header('Access-Control-Allow-Origin', '*')
+        ->header('Cache-Control', 'public, max-age=31536000');
+})->where('path', '.*');
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [CurrentSessionController::class, 'show'])->name('login');
     Route::post('/current-session', [CurrentSessionController::class, 'store'])->name('currentSession.store');

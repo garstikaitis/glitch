@@ -4,7 +4,7 @@
             <TheSidebar />
             <TheHeader />
 
-            <main class="ml-64">
+            <main class="ml-64 pr-6">
                 <slot></slot>
             </main>
         </div>
