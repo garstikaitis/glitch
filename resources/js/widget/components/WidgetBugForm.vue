@@ -14,8 +14,19 @@
 <script setup lang="ts">
 const content = ref("")
 const emit = defineEmits(['submit'])
+
+onMounted(() => {
+    window.addEventListener('keyup', handlePressEnterToSubmit)
+})
+onBeforeUnmount(() => {
+    window.removeEventListener('keyup', handlePressEnterToSubmit)
+})
+
+function handlePressEnterToSubmit(e) {
+    if(e.key === 'Enter' && content.value.length) submitBugReport();
+}
 function submitBugReport() {
-    emit('submit')
+    emit('submit', content.value)
 }
 </script>
 

@@ -18,6 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web([HandleInertiaRequests::class])
             ->redirectUsersTo('/dashboard')
             ->redirectGuestsTo('/login');
+        $middleware->validateCsrfTokens(except: [
+            '/widgets/*',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

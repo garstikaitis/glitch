@@ -22,7 +22,13 @@ final class WidgetsController
 
     public function index(): Response
     {
-        return Inertia::render('Widgets', ['widgets' => WidgetResource::collection(Widget::all())]);
+        return Inertia::render('Widgets',
+            [
+                'widgets' => WidgetResource::collection(
+                    Widget::with('submits')->get()
+                )
+            ]
+        );
     }
 
     public function create(): Response

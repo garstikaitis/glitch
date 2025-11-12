@@ -5,7 +5,7 @@
         <WidgetButton v-if="!isInBugReportMode" @click="handleBugReportModeToggle"/>
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import WidgetBugForm from '@/widget/components/WidgetBugForm.vue'
 import WidgetBugOverlay from "@/widget/components/WidgetBugOverlay.vue";
 import WidgetButton from "@/widget/components/WidgetButton.vue";
@@ -25,9 +25,24 @@ function handleBugReportModeToggle() {
     isInBugReportMode.value = !isInBugReportMode.value
 }
 
-function resetBugForm() {
+function resetBugForm(comment: string) {
+    fetch('https://glitch.test/api/widgets/bb2b7323-c4d1-40db-9afc-ddbee6ef987b/submits', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify({
+            comment,
+            coordinate_x: coordinates.value.x,
+            coordinate_y: coordinates.value.y,
+            page_url: window.location.href,
+            user_agent: navigator.userAgent,
+        })
+    })
     coordinates.value = { x: null, y: null };
-    isInBugReportMode.value = false
+    isInBugReportMode.value = false;
     window.removeEventListener('keydown', listenForClose);
 }
 

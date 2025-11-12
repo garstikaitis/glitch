@@ -10,16 +10,14 @@
         <template #content>
             <div class="bg-gray-800 p-4 rounded-md">
             <code class="m-0 ">
-                {{
-                embedCode
-                }}
+                {{ embedCode }}
             </code>
             </div>
         </template>
         <template #footer>
             <div class="flex gap-4 mt-1">
                 <Button icon="pi pi-clipboard" label="Copy embed code" severity="secondary" variant="link" class="w-full" @click="copyEmbedCode" />
-                <Button label="Reports" severity="secondary" variant="link" class="w-full" />
+                <Button label="Reports" severity="secondary" variant="link" class="w-full" :badge="widget.submits_count" />
             </div>
         </template>
     </Card>
